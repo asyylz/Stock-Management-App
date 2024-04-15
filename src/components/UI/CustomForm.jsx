@@ -2,7 +2,6 @@ import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 import Container from "@mui/material/Container";
 import { Box, Button, TextField } from "@mui/material";
-import image from "/src/assets/hero.png";
 import AuthHeader from "../AuthHeader";
 import AuthImage from "../AuthImage";
 import Grid from "@mui/material/Grid";
@@ -18,9 +17,10 @@ export default function CustomForm({
   inputName,
   buttonUnderText,
   navigate,
+  validationSchema,
+  image,
   ...props
 }) {
-  console.log(inputQuantity);
   return (
     <Container>
       <Grid
@@ -53,6 +53,7 @@ export default function CustomForm({
             {typography}
           </Typography>
           <Formik
+            validationSchema={validationSchema}
             initialValues={initialValues}
             onSubmit={(values) => console.log(values)}
           >
@@ -73,11 +74,11 @@ export default function CustomForm({
                       id={input}
                       name={input}
                       label={input}
-                      //value={values.input}
+                      value={values[input]}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      error={touched.input && Boolean(errors.input)}
-                      helperText={touched.input && errors.input}
+                      error={touched[input] && Boolean(errors[input])}
+                      helperText={touched[input] && errors[input]}
                       {...props}
                     />
                   ))}
