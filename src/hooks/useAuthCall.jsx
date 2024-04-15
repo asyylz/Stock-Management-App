@@ -1,6 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { fetchFail, fetchStart, registerSuccess } from "../features/authSlice";
+import {
+  fetchFail,
+  fetchStart,
+  registerSuccess,
+  loginSuccess,
+} from "../features/authSlice";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -32,7 +37,9 @@ const useAuthCall = () => {
         userCredentials
       );
       console.log(data);
-      return data;
+      dispatch(loginSuccess(data));
+      navigate("/stock");
+      //return data;
     } catch (error) {
       console.log(error);
     }

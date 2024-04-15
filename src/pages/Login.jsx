@@ -26,7 +26,6 @@ const Login = () => {
         buttonName="Login"
         buttonUnderText=" Don't have an account? Sign Up"
         nav="register"
-        afterSubmissionNavigate="stock"
         initialValues={initialValues}
         validationSchema={loginValidationSchema}
         image={image}

@@ -20,7 +20,6 @@ export default function CustomForm({
   validationSchema,
   image,
   submitAction,
-  afterSubmissionNavigate,
   ...props
 }) {
   const navigate = useNavigate();
@@ -63,7 +62,6 @@ export default function CustomForm({
               submitAction(values);
               console.log(values);
               setSubmitting(false);
-              navigate(afterSubmissionNavigate);
             }}
           >
             {({
