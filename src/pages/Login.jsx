@@ -1,5 +1,5 @@
 import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
+import { Box, Button, TextField } from "@mui/material";
 import { useTheme } from "@mui/material";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -9,6 +9,7 @@ import image from "../assets/hero.png";
 import { Link } from "react-router-dom";
 import AuthHeader from "../components/AuthHeader";
 import AuthImage from "../components/AuthImage";
+import { Form, Formik } from "formik";
 
 const Login = () => {
   const theme = useTheme();
@@ -40,11 +41,56 @@ const Login = () => {
           <Typography variant="h4" align="center" mb={4} color="secondary.main">
             SIGN IN
           </Typography>
+          <Formik
+            initialValues={{
+              username: "",
+              password: "",
+            }}
+            onSubmit={(values) => {
+              // same shape as initial values
+              console.log(values);
+              register(values);
+            }}
+          >
+            {(
+              values,
+              errors,
+              isSubmitting,
+              handleSubmit,
+              handleBlur,
+              handleChange,
+              touched
+            ) => (
+              <Form>
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                  <TextField
+                    id="email"
+                    name="email"
+                    label="email"
+                    //value={values.username}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    //error={touched.username && Boolean(errors.username)}
+                    //helperText={touched.username && errors.username} //
+                  />
+                  <TextField
+                    id="password"
+                    name="password"
+                    type="password"
+                    label="Password"
+                    //value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                   // error={touched.password && Boolean(errors.password)}
+                    //helperText={touched.password && errors.password}
+                  />
+                </Box>
+              </Form>
+            )}
+          </Formik>
 
           <Box sx={{ textAlign: "center", mt: 2, color: "secondary.main" }}>
-            <Link to="/register">
-              Don't have an account? Sign Up
-            </Link>
+            <Link to="/register">Don't have an account? Sign Up</Link>
           </Box>
         </Grid>
 

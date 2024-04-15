@@ -1,6 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { fetchStart } from "../features/authSlice";
+import { fetchFail, fetchStart, registerSuccess } from "../features/authSlice";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const useAuthCall = () => {
   const dispatch = useDispatch();
@@ -9,7 +11,7 @@ const useAuthCall = () => {
   const register = async (userInfo) => {
     dispatch(fetchStart());
     try {
-      const { data } = await Axios.post(
+      const { data } = await axios.post(
         "https://18110.fullstack.clarusway.com/users",
         userInfo
       );
@@ -21,4 +23,7 @@ const useAuthCall = () => {
       console.log(error);
     }
   };
+  return { register };
 };
+
+export default useAuthCall;
