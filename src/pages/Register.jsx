@@ -11,6 +11,13 @@ import image from "../assets/regi.avif";
 import AuthHeader from "../components/AuthHeader";
 import AuthImage from "../components/AuthImage";
 
+//!With Yup, we can apply the validation conditions we want to the fields we want.
+//we create. Then, by defining this schema we created in formik
+//  we are using. In this way, the formik both manages our form and
+// Applies validationSchema. The point to be considered is; in formik
+// with the keys in the initialValues ​​we defined, the keys we defined in Yup
+// be the same. If even one letter is different, what you wrote about that field
+//validation does not work.
 const SignupSchema = Yup.object().shape({
   username: Yup.string().min(3).max(15).required("Required!"),
   firstName: Yup.string()
@@ -94,14 +101,17 @@ const Register = () => {
                 <Box sx={{ display:"flex",flexDirection:"column",gap:2}}>
                   <TextField
                     id="username"
-                    name="username"
+                    name="username" //makes matching based on formik name attribution.
                     label="Username"
                     value={values.username}
                     onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={touched.username && Boolean(errors.username)}
-                    helperText={touched.username && errors.username}
+                    onBlur={handleBlur} // event indicating that the user left the input field
+                    error={touched.username && Boolean(errors.username)} // If it does not fit the pattern we gave in validation, the error attribute expects a false/true value from me to change the color to error, so we return a boolean value to make it healthier.
+                    // touched also detects whether the user clicked on the input or not
+                    helperText={touched.username && errors.username} //If it does not fit the pattern we gave in validation, we capture the message from errors to show the relevant messages
                   />
+                  {/* error ve helperText propertyleri Textfield componentine ait propertyler. */}
+                {/* mui textfield kullanmadığımzda <span>{touched.username && errors.username}</span> */}
                   <TextField
                     id="firstName"
                     name="firstName"
