@@ -27,8 +27,8 @@ function Dashboard() {
               </p>
             </item>
             <item>
-              <Button color="inherit" onClick={logout}>
-                Logout
+              <Button style={{ textTransform: "none" }} color="inherit" onClick={logout}>
+                {currentUser ? "Logout" : "Login"}
               </Button>
             </item>
           </Stack>
