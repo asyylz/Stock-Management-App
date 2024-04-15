@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import CustomForm from "../components/UI/CustomForm.jsx";
 import image from "../assets/hero.png";
 import useAuthCall from "../hooks/useAuthCall";
+import { useSelector } from "react-redux";
 
 const loginValidationSchema = Yup.object({
   username: Yup.string().required("Required"),
@@ -16,6 +17,7 @@ const initialValues = {
 
 const Login = () => {
   const theme = useTheme();
+
   const { login } = useAuthCall();
 
   return (

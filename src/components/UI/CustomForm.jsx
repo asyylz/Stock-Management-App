@@ -9,6 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import LockIcon from "@mui/icons-material/Lock";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function CustomForm({
   inputQuantity,
@@ -22,6 +23,7 @@ export default function CustomForm({
   submitAction,
   ...props
 }) {
+  const errorText = useSelector((state) => state.auth.errorMessage);
 
   return (
     <Container>
@@ -54,12 +56,12 @@ export default function CustomForm({
           >
             {typography}
           </Typography>
+          {errorText && <h3 style={{ color: "darkcyan" }}>{errorText}</h3>}
           <Formik
             validationSchema={validationSchema}
             initialValues={initialValues}
             onSubmit={(values, { setSubmitting }) => {
               submitAction(values);
-              console.log(values);
               setSubmitting(false);
             }}
           >

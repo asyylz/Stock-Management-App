@@ -42,7 +42,8 @@ const useAuthCall = () => {
       navigate("/stock");
       //return data;
     } catch (error) {
-      console.log(error);
+      dispatch(fetchFail(error));
+      console.log(error.response.data.message);
     }
   };
 

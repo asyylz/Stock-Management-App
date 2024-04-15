@@ -1,6 +1,6 @@
 import React from "react";
 import AppBar from "@mui/material/AppBar";
-import { Stack, Box } from "@mui/material/";
+import { Stack, Box, Divider } from "@mui/material/";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
@@ -21,16 +21,16 @@ function Dashboard() {
             STOCK APP
           </Typography>
           <Stack>
-            <item>
-              <p style={{ textTransform: "none" }}>
-                {currentUser ? `Welcome ${currentUser}` : null}
-              </p>
-            </item>
-            <item>
-              <Button style={{ textTransform: "none" }} color="inherit" onClick={logout}>
-                {currentUser ? "Logout" : "Login"}
-              </Button>
-            </item>
+            <p style={{ textTransform: "none" }}>
+              {currentUser ? `Welcome ${currentUser}` : null}
+            </p>
+            <Button
+              style={{ textTransform: "none" }}
+              color="inherit"
+              onClick={logout}
+            >
+              {currentUser ? "Logout" : "Login"}
+            </Button>
           </Stack>
         </Toolbar>
       </AppBar>
