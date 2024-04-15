@@ -47,6 +47,7 @@ const Register = () => {
       initialValues={initialValues}
       validationSchema={SignupSchema}
       image={image}
+      submitAction={register}
     />
   );
 };

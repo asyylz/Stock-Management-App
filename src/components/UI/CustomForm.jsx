@@ -14,11 +14,11 @@ export default function CustomForm({
   typography,
   initialValues,
   buttonName,
-  inputName,
   buttonUnderText,
   navigate,
   validationSchema,
   image,
+  submitAction,
   ...props
 }) {
   return (
@@ -55,7 +55,10 @@ export default function CustomForm({
           <Formik
             validationSchema={validationSchema}
             initialValues={initialValues}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values) => {
+              submitAction(values);
+              console.log(values);
+            }}
           >
             {({
               values,
@@ -63,7 +66,7 @@ export default function CustomForm({
               touched,
               handleChange,
               handleBlur,
-              handleSubmit,
+              //handleSubmit,
               isSubmitting,
             }) => (
               <Form>
@@ -73,24 +76,40 @@ export default function CustomForm({
                       key={index}
                       id={input}
                       name={input}
-                      label={input}
+                      label={input.slice(0, 1).toUpperCase() + input.slice(1)}
                       value={values[input]}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       error={touched[input] && Boolean(errors[input])}
                       helperText={touched[input] && errors[input]}
+                      inputProps={{
+                        "auto-complete": "off",
+                      }}
                       {...props}
                     />
                   ))}
-                  <Button variant="contained" type="submit">
-                    {buttonName}
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Submitting" : buttonName}
                   </Button>
                 </Box>
               </Form>
             )}
           </Formik>
           <Box sx={{ textAlign: "center", mt: 2, color: "secondary.main" }}>
-            <Link to={navigate}>{buttonUnderText}</Link>
+            <Link
+              to={navigate}
+              style={{
+                color: "inherit",
+                textDecoration: "inherit",
+                fontSize: "25px",
+              }}
+            >
+              {buttonUnderText}
+            </Link>
           </Box>
         </Grid>
         <AuthImage image={image} />
