@@ -23,7 +23,22 @@ const useAuthCall = () => {
       console.log(error);
     }
   };
-  return { register };
+
+  const login = async (userCredentials) => {
+    dispatch(fetchStart());
+    try {
+      const { data } = await axios.post(
+        "https://18110.fullstack.clarusway.com/auth/login",
+        userCredentials
+      );
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return { register, login };
 };
 
 export default useAuthCall;

@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import LockIcon from "@mui/icons-material/Lock";
+import { useNavigate } from "react-router-dom";
 
 export default function CustomForm({
   inputQuantity,
@@ -15,12 +16,15 @@ export default function CustomForm({
   initialValues,
   buttonName,
   buttonUnderText,
-  navigate,
+  nav,
   validationSchema,
   image,
   submitAction,
+  afterSubmissionNavigate,
   ...props
 }) {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Grid
@@ -59,6 +63,7 @@ export default function CustomForm({
               submitAction(values);
               console.log(values);
               setSubmitting(false);
+              navigate(afterSubmissionNavigate);
             }}
           >
             {({
@@ -102,7 +107,7 @@ export default function CustomForm({
           </Formik>
           <Box sx={{ textAlign: "center", mt: 2, color: "secondary.main" }}>
             <Link
-              to={navigate}
+              to={nav}
               style={{
                 color: "inherit",
                 textDecoration: "inherit",

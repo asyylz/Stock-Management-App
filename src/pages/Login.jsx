@@ -1,7 +1,8 @@
 import { useTheme } from "@mui/material";
 import * as Yup from "yup";
-import CustomForm from "../components/UI/customForm";
+import CustomForm from "../components/UI/CustomForm.jsx";
 import image from "../assets/hero.png";
+import useAuthCall from "../hooks/useAuthCall";
 
 const loginValidationSchema = Yup.object({
   username: Yup.string().required("Required"),
@@ -15,6 +16,7 @@ const initialValues = {
 
 const Login = () => {
   const theme = useTheme();
+  const { login } = useAuthCall();
 
   return (
     <>
@@ -23,10 +25,12 @@ const Login = () => {
         typography="SIGN IN"
         buttonName="Login"
         buttonUnderText=" Don't have an account? Sign Up"
-        navigate="/register"
+        nav="register"
+        afterSubmissionNavigate="stock"
         initialValues={initialValues}
         validationSchema={loginValidationSchema}
         image={image}
+        submitAction={login}
       />
     </>
   );

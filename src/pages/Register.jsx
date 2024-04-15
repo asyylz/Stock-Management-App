@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 import image from "../assets/regi.avif";
 import useAuthCall from "../hooks/useAuthCall";
-import CustomForm from "../components/UI/customForm";
+import CustomForm from "../components/UI/CustomForm.jsx";
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string().min(3).max(15).required("Required!"),
@@ -43,7 +43,7 @@ const Register = () => {
       typography="REGISTER"
       buttonName="Register"
       buttonUnderText="Already have an account? Sign in"
-      navigate="/"
+      nav="/"
       initialValues={initialValues}
       validationSchema={SignupSchema}
       image={image}
