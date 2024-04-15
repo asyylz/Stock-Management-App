@@ -55,9 +55,10 @@ export default function CustomForm({
           <Formik
             validationSchema={validationSchema}
             initialValues={initialValues}
-            onSubmit={(values) => {
+            onSubmit={(values, { setSubmitting }) => {
               submitAction(values);
               console.log(values);
+              setSubmitting(false);
             }}
           >
             {({
