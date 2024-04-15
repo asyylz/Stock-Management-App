@@ -22,6 +22,13 @@ const SignupSchema = Yup.object().shape({
     .max(50, "Too Long!")
     .required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string()
+    .min(8, "Er muss mindestens 8 Zeichen lang sein!")
+    .max(50, "Er darf maximal 50 Zeichen lang sein!")
+    .matches(/\d+/,"Muss mindestens eine Ziffer enthalten!")
+    .matches(/[A-Z]/, "Muss mindestens einen Großbuchstaben enthalten!")
+    .matches(/[@$?!%&*]+/, "Muss mindestens ein Sonderzeichen (@$!%*?&) enthalten!")
+    .required()
 });
 
 const Register = () => {
