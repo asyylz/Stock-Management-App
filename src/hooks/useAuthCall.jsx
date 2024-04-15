@@ -9,6 +9,11 @@ import {
 } from "../features/authSlice";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {
+  toastSuccessNotify,
+  toastErrorNotify,
+  toastWarnNotify,
+} from "../helper/ToastNotify";
 
 const useAuthCall = () => {
   const dispatch = useDispatch();
@@ -25,7 +30,8 @@ const useAuthCall = () => {
       dispatch(registerSuccess(data));
       navigate("/stock");
     } catch (error) {
-      dispatch(fetchFail());
+      dispatch(fetchFail(error));
+      toastErrorNotify("Registeration failed!");
       console.log(error);
     }
   };
@@ -39,10 +45,12 @@ const useAuthCall = () => {
       );
       console.log(data);
       dispatch(loginSuccess(data));
+      toastSuccessNotify("Logged in!");
       navigate("/stock");
       //return data;
     } catch (error) {
       dispatch(fetchFail(error));
+      toastErrorNotify("Failed to login!");
       console.log(error.response.data.message);
     }
   };
@@ -55,6 +63,7 @@ const useAuthCall = () => {
       );
       console.log(data);
       dispatch(logoutSucces());
+      toastWarnNotify("Logout succesfully!");
       navigate("/");
     } catch (error) {
       console.log(error);
