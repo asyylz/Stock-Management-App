@@ -49,7 +49,7 @@ const Login = () => {
             onSubmit={(values) => {
               // same shape as initial values
               console.log(values);
-              register(values);
+              //login(values);
             }}
           >
             {(
@@ -66,12 +66,12 @@ const Login = () => {
                   <TextField
                     id="email"
                     name="email"
-                    label="email"
-                    //value={values.username}
+                    label="Email"
+                    value={values.username}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     //error={touched.username && Boolean(errors.username)}
-                    //helperText={touched.username && errors.username} //
+                    // helperText={touched.username && errors.username} //
                   />
                   <TextField
                     id="password"
@@ -81,9 +81,12 @@ const Login = () => {
                     //value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                   // error={touched.password && Boolean(errors.password)}
+                    // error={touched.password && Boolean(errors.password)}
                     //helperText={touched.password && errors.password}
                   />
+                  <Button variant="contained" type="submit">
+                    Login
+                  </Button>
                 </Box>
               </Form>
             )}
