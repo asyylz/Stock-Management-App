@@ -37,6 +37,7 @@ const SignupSchema = Yup.object().shape({
 
 const Register = () => {
   const { register } = useAuthCall();
+
   return (
     <Container maxWidth="lg">
       <Grid
@@ -79,11 +80,12 @@ const Register = () => {
               firstName: "",
               lastName: "",
             }}
-            validationSchema={SignupSchema}
+            //validationSchema={SignupSchema}
             onSubmit={(values) => {
+              console.log("clicked");
               // same shape as initial values
               console.log(values);
-              register(values);
+              //register(values);
             }}
           >
             {({
