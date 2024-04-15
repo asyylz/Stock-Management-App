@@ -16,6 +16,8 @@ export default function CustomForm({
   initialValues,
   buttonName,
   inputName,
+  buttonUnderText,
+  navigate,
   ...props
 }) {
   console.log(inputQuantity);
@@ -86,6 +88,9 @@ export default function CustomForm({
               </Form>
             )}
           </Formik>
+          <Box sx={{ textAlign: "center", mt: 2, color: "secondary.main" }}>
+            <Link to={navigate}>{buttonUnderText}</Link>
+          </Box>
         </Grid>
         <AuthImage image={image} />
       </Grid>
