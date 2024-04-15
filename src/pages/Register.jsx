@@ -1,17 +1,18 @@
 import LockIcon from "@mui/icons-material/Lock";
-import { Box, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { Formik, Form } from "formik";
+import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
+import * as Yup from "yup";
 import image from "../assets/regi.avif";
 import AuthHeader from "../components/AuthHeader";
 import AuthImage from "../components/AuthImage";
-import * as Yup from "yup";
 
 const SignupSchema = Yup.object().shape({
+  username: Yup.string().min(3).max(15).required("Required!"),
   firstName: Yup.string()
     .min(2, "Too Short!")
     .max(50, "Too Long!")
@@ -83,16 +84,62 @@ const Register = () => {
               /* and other goodies */
             }) => (
               <Form>
-                <TextField
-                  id="username"
-                  name="username"
-                  label="Username"
-                  value={values.username}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={touched.username && Boolean(errors.username)}
-                  helperText={""}
-                />
+                <Box sx={{ display:"flex",flexDirection:"column",gap:2}}>
+                  <TextField
+                    id="username"
+                    name="username"
+                    label="Username"
+                    value={values.username}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.username && Boolean(errors.username)}
+                    helperText={touched.username && errors.username}
+                  />
+                  <TextField
+                    id="firstName"
+                    name="firstName"
+                    label="FirstName"
+                    value={values.firstName}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.firstName && Boolean(errors.firstName)}
+                    helperText={touched.firstName && errors.firstName}
+                  />
+                  <TextField
+                    id="lastName"
+                    name="lastName"
+                    label="LastName"
+                    value={values.lastName}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.lastName && Boolean(errors.lastName)}
+                    helperText={touched.lastName && errors.lastName}
+                  />
+
+                  <TextField
+                    id="email"
+                    name="email"
+                    label="Email"
+                    type="email"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.email && Boolean(errors.email)}
+                    helperText={touched.email && errors.email}
+                  />
+                  <TextField
+                    id="password"
+                    name="password"
+                    type="password"
+                    label="Password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.password && Boolean(errors.password)}
+                    helperText={touched.password && errors.password}
+                  />
+                  <Button variant="contained" type="submit">Sign Up</Button>
+                </Box>
               </Form>
             )}
           </Formik>
