@@ -22,7 +22,6 @@ export default function CustomForm({
   submitAction,
   ...props
 }) {
-  const navigate = useNavigate();
 
   return (
     <Container>

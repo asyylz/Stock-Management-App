@@ -5,6 +5,7 @@ import {
   fetchStart,
   registerSuccess,
   loginSuccess,
+  logoutSucces,
 } from "../features/authSlice";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -45,7 +46,21 @@ const useAuthCall = () => {
     }
   };
 
-  return { register, login };
+  const logout = async () => {
+    dispatch(fetchStart());
+    try {
+      const { data } = await axios.get(
+        "https://18110.fullstack.clarusway.com/auth/logout"
+      );
+      console.log(data);
+      dispatch(logoutSucces());
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return { register, login, logout };
 };
 
 export default useAuthCall;
