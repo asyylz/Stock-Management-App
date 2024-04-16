@@ -1,14 +1,14 @@
 import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 import Container from "@mui/material/Container";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
+import Button from "@mui/material/Button";
 import AuthHeader from "../AuthHeader";
 import AuthImage from "../AuthImage";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import LockIcon from "@mui/icons-material/Lock";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function CustomForm({
@@ -60,8 +60,9 @@ export default function CustomForm({
           <Formik
             validationSchema={validationSchema}
             initialValues={initialValues}
-            onSubmit={(values, { setSubmitting }) => {
-              submitAction(values);
+            onSubmit={async (values, { setSubmitting, resetForm }) => {
+              await submitAction(values) 
+              resetForm();
               setSubmitting(false);
             }}
           >
@@ -87,18 +88,20 @@ export default function CustomForm({
                       onBlur={handleBlur}
                       error={touched[input] && Boolean(errors[input])}
                       helperText={touched[input] && errors[input]}
-                      inputProps={{
-                        "auto-complete": "off",
-                      }}
+                      // inputProps={{
+                      //   autoComplete: "off",
+                      // }}
                       {...props}
                     />
                   ))}
                   <Button
-                    variant="contained"
                     type="submit"
+                    variant="contained"
+                    size="large"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? "Submitting" : buttonName}
+                    {isSubmitting ? "Loading..." : buttonName}
+                    {console.log(isSubmitting)}
                   </Button>
                 </Box>
               </Form>
