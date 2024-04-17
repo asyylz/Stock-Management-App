@@ -15,18 +15,18 @@ import {
   toastWarnNotify,
 } from "../helper/ToastNotify";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const useAuthCall = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { token } = useSelector((store) => store.auth);
 
   const register = async (userInfo) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios.post(
-        "https://18110.fullstack.clarusway.com/users",
-        userInfo
-      );
-      console.log(data);
+      const { data } = await axios.post(`${BASE_URL}users/`, userInfo);
+
       dispatch(registerSuccess(data));
       navigate("/stock");
     } catch (error) {
@@ -40,7 +40,7 @@ const useAuthCall = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axios.post(
-        "https://18110.fullstack.clarusway.com/auth/login",
+        `${BASE_URL}auth/login`,
         userCredentials
       );
       console.log(data);
@@ -58,10 +58,12 @@ const useAuthCall = () => {
   const logout = async () => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios.get(
-        "https://18110.fullstack.clarusway.com/auth/logout"
-      );
-      console.log(data);
+      const { data } = await axios.get(`${BASE_URL}auth/logout`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+      
       dispatch(logoutSucces());
       toastWarnNotify("Logout succesfully!");
       navigate("/");
