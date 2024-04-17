@@ -51,6 +51,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Outlet } from "react-router-dom";
 import useAuthCall from "../hooks/useAuthCall";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const drawerWidth = 240;
 
@@ -58,7 +59,7 @@ function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
-  const {logout} = useAuthCall()
+  const { logout } = useAuthCall();
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -119,6 +120,9 @@ function Dashboard(props) {
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
+          backgroundColor: "white",
+          color: "secondary.second",
+          borderRadius: "0.5rem",
         }}
       >
         <Toolbar>
@@ -131,11 +135,17 @@ function Dashboard(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{flexGrow:1}}>
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
             Stock App
           </Typography>
-          <Button color="inherit" onClick={logout}>
-            Logout
+          <Button
+            color="inherit"
+            sx={{
+              "&:hover": { backgroundColor: "secondary.main", color: "white" },
+            }}
+            onClick={logout}
+          >
+            Logout <LogoutIcon sx={{ ml: "0.5rem" }} />
           </Button>
         </Toolbar>
       </AppBar>
