@@ -1,36 +1,3 @@
-// import React from "react";
-// import AppBar from "@mui/material/AppBar";
-// import Box from "@mui/material/Box";
-// import CssBaseline from "@mui/material/CssBaseline";
-// import Toolbar from "@mui/material/Toolbar";
-// import Button from "@mui/material/Button";
-// import Typography from "@mui/material/Typography";
-// import useAuthCall from "../hooks/useAuthCall";
-// import { Outlet } from "react-router-dom";
-
-// function Dashboard() {
-//   const {logout} = useAuthCall()
-//   return (
-//     <Box sx={{ display: "flex" }}>
-//       <CssBaseline />
-//       <AppBar position="fixed">
-//         <Toolbar>
-//           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-//             STOCK APP
-//           </Typography>
-//           <Button color="inherit" onClick={logout}>Logout</Button>
-//         </Toolbar>
-//       </AppBar>
-//       <div style={{marginTop:"10rem"}}>
-
-//       <Outlet />
-//       </div>
-//     </Box>
-//   );
-// }
-
-// export default Dashboard;
-
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -52,8 +19,9 @@ import Typography from "@mui/material/Typography";
 import { Outlet } from "react-router-dom";
 import useAuthCall from "../hooks/useAuthCall";
 import LogoutIcon from "@mui/icons-material/Logout";
+import MenuListItems from "../components/MenuListItems";
 
-const drawerWidth = 240;
+const width = 240;
 
 function Dashboard(props) {
   const { window } = props;
@@ -75,39 +43,6 @@ function Dashboard(props) {
       setMobileOpen(!mobileOpen);
     }
   };
-
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
   // Remove this const when copying and pasting into your project.
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -118,8 +53,8 @@ function Dashboard(props) {
       <AppBar
         position="fixed"
         sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+          width: { sm: `calc(100% - ${width}px)` },
+          ml: { sm: `${width}px` },
           backgroundColor: "white",
           color: "secondary.second",
           borderRadius: "0.5rem",
@@ -151,7 +86,7 @@ function Dashboard(props) {
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{ width: { sm: width }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -168,11 +103,11 @@ function Dashboard(props) {
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: drawerWidth,
+              width: width,
             },
           }}
         >
-          {drawer}
+          <MenuListItems />
         </Drawer>
         <Drawer
           variant="permanent"
@@ -180,12 +115,12 @@ function Dashboard(props) {
             display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: drawerWidth,
+              width: width,
             },
           }}
           open
         >
-          {drawer}
+          <MenuListItems />
         </Drawer>
       </Box>
       <Box
@@ -193,7 +128,7 @@ function Dashboard(props) {
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          width: { sm: `calc(100% - ${width}px)` },
         }}
       >
         <Toolbar />
