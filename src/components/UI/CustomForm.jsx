@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import LockIcon from "@mui/icons-material/Lock";
 import { useSelector } from "react-redux";
 
+
 export default function CustomForm({
   inputQuantity,
   typography,
@@ -23,7 +24,10 @@ export default function CustomForm({
   submitAction,
   ...props
 }) {
+
   const errorText = useSelector((state) => state.auth.errorMessage);
+
+
 
   return (
     <Container>
