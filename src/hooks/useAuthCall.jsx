@@ -66,7 +66,9 @@ const useAuthCall = () => {
       toastWarnNotify("Logout succesfully!");
       navigate("/");
     } catch (error) {
-      console.log(error);
+      dispatch(fetchFail());
+      console.log(error.response.data.message);
+      toastErrorNotify("Logout can not be performed");
     }
   };
 
