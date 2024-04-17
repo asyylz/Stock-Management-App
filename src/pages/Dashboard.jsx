@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import useAuthCall from "../hooks/useAuthCall";
 import { useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
 
 function Dashboard() {
   const { logout } = useAuthCall();
@@ -34,6 +35,9 @@ function Dashboard() {
           </Stack>
         </Toolbar>
       </AppBar>
+      <div style={{ marginTop: "10rem" }}>
+        <Outlet />
+      </div>
     </Box>
   );
 }
