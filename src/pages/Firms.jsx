@@ -22,7 +22,7 @@ export default function Firms() {
       >
         Firms
       </Typography>
-      <Button variant="contained" sx={{ mb: '4rem' }}>
+      <Button variant="contained" sx={{ mb: '3rem' }}>
         New Firm
       </Button>
       <Grid container spacing={2}>

@@ -25,7 +25,12 @@ export default function FirmCard({ image, name, address, phone }) {
           {address}
         </Typography>
       </CardContent>
-      <CardMedia sx={{ height: 140 }} image={image} title={name} />
+      <CardMedia
+        sx={{ height: 140, objectFit: 'contain' }}
+        component="img"
+        image={image}
+        title={name}
+      />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           Phone:{phone}
