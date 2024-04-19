@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFail, fetchStart, firmsSuccess } from '../features/stockSlice';
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const useStockCall = () => {
   const dispatch = useDispatch();
@@ -9,7 +10,7 @@ const useStockCall = () => {
   const getFirms = async () => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios(`${import.meta.env.VITE_BASE_URL}firms`, {
+      const { data } = await axios(`${BASE_URL}firms`, {
         headers: {
           Authorization: `Token ${token}`,
           // Authorization: `Bearer ${accesstoken}` //*  for jwt
