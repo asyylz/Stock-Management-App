@@ -3,10 +3,10 @@ import { useEffect } from 'react';
 import useStockCall from '../hooks/useStockCall';
 
 export default function Brands() {
-  const { getBrands } = useStockCall();
+  const { getStockData } = useStockCall();
 
   useEffect(() => {
-    getBrands();
+    getStockData("brands");
   }, []);
 
   return <></>;

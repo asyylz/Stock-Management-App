@@ -13,27 +13,10 @@ const useStockCall = () => {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
 
-  const getFirms = async () => {
+  const getStockData = async (url) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios(`${BASE_URL}firms`, {
-        headers: {
-          Authorization: `Token ${token}`,
-          // Authorization: `Bearer ${accesstoken}` //* for jwt
-        },
-      });
-      console.log(data);
-      // dispatch(firmsSuccess(data.data));
-      dispatch(getSuccess({ data: data.data, url: 'firms' }));
-    } catch (error) {
-      console.log(error);
-      dispatch(fetchFail());
-    }
-  };
-  const getBrands = async () => {
-    dispatch(fetchStart());
-    try {
-      const { data } = await axios(`${BASE_URL}brands`, {
+      const { data } = await axios(`${BASE_URL}${url}`, {
         headers: {
           Authorization: `Token ${token}`,
           // Authorization: `Bearer ${accesstoken}` //* for jwt
@@ -41,14 +24,14 @@ const useStockCall = () => {
       });
       console.log(data);
       // dispatch(brandsSuccess(data.data));
-      dispatch(getSuccess({ data: data.data, url: 'brands' })); // always single parameter
+      dispatch(getSuccess({ data: data.data, url: url })); // always single parameter
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
     }
   };
 
-  return { getFirms, getBrands };
+  return { getStockData };
 };
 
 export default useStockCall;
