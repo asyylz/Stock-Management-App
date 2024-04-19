@@ -3,28 +3,37 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-export default function FirmCard({ data }) {
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import EditIcon from '@mui/icons-material/Edit';
+export default function FirmCard({ image, name, address, phone }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        sx={{ height: 140 }}
-        image={data.image}
-        title={data.name}
-      />
+    <Card
+      sx={{
+        height: 390,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: '0.5rem',
+      }}
+    >
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {data.name}
+          {name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {address}
+        </Typography>
+      </CardContent>
+      <CardMedia sx={{ height: 140 }} image={image} title={name} />
+      <CardContent>
+        <Typography variant="body2" color="text.secondary">
+          Phone:{phone}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <EditIcon />
+        <DeleteOutlineIcon />
       </CardActions>
     </Card>
   );

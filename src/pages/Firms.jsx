@@ -27,8 +27,8 @@ export default function Firms() {
       </Button>
       <Grid container spacing={2}>
         {firms.map((firm) => (
-          <Grid item xs={12} md={4}>
-            <FirmCard data={firm} />
+          <Grid item xs={12} md={6} lg={4} xl={3} key={firm.id}>
+            <FirmCard {...firm} />
           </Grid>
         ))}
       </Grid>
