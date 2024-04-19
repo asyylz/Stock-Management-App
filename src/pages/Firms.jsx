@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import useStockCall from '../hooks/useStockCall';
-import { Button, Container, Typography } from '@mui/material';
+import { Button, Container, Typography, Grid } from '@mui/material';
 import { useSelector } from 'react-redux';
+import FirmCard from '../components/Cards/FirmCard';
 export default function Firms() {
   const { getStockData } = useStockCall();
   const { firms } = useSelector((state) => state.stock);
@@ -21,7 +22,16 @@ export default function Firms() {
       >
         Firms
       </Typography>
-      <Button variant="contained">New Firm</Button>
+      <Button variant="contained" sx={{ mb: '4rem' }}>
+        New Firm
+      </Button>
+      <Grid container spacing={2}>
+        {firms.map((firm) => (
+          <Grid item xs={12} md={4}>
+            <FirmCard data={firm} />
+          </Grid>
+        ))}
+      </Grid>
     </Container>
   );
 }
