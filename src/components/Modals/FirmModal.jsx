@@ -1,8 +1,6 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import { useState } from 'react';
+import { Box, Button, Modal, TextField, Typography } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -16,28 +14,104 @@ const style = {
   p: 4,
 };
 
-export default function FirmModal({open,handleClose}) {
-//   const [open, setOpen] = React.useState(false);
-//   const handleOpen = () => setOpen(true);
-//   const handleClose = () => setOpen(false);
+const modalFormFields = [
+  {
+    label: 'Firm Name',
+    name: 'name',
+    type: 'text',
+    id: 'name',
+    required: true,
+  },
+  {
+    label: 'Password',
+    name: 'password',
+    type: 'password',
+    id: 'password',
+    required: true,
+  },
+  {
+    label: 'Firm Address',
+    name: 'address',
+    type: 'address',
+    id: 'address',
+    required: true,
+  },
+  {
+    label: 'Firm Phone',
+    name: 'phone',
+    type: 'phone',
+    id: 'phone',
+    required: true,
+  },
+  {
+    label: 'Firm Logo',
+    name: 'image',
+    type: 'text',
+    id: 'image',
+    required: true,
+  },
+];
+
+export default function FirmModal({ open, handleClose }) {
+  const [info, setInfo] = useState({
+    name: '',
+    password: '',
+    address: '',
+    phone: '',
+    image: '',
+  });
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log(Object.fromEntries(data.entries()));
+    setInfo({
+      name: '',
+      password: '',
+      address: '',
+      phone: '',
+      image: '',
+    });
+  }
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
+  }
 
   return (
-    <div>
-      <Modal
-        open={open}
-        onClose={handleClose}//* onClose mui modal'a ait bir fonksiyondur.
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
-    </div>
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={style}>
+        <Typography id="modal-modal-title" variant="h6" component="h2">
+          Firm Information
+        </Typography>
+        <form
+          onSubmit={handleSubmit}
+          sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+        >
+          {modalFormFields.map((field) => (
+            <TextField
+              key={field.id}
+              label={field.label}
+              name={field.name}
+              id={field.id}
+              type={field.type}
+              required={field.required}
+              variant="outlined"
+              value={info[field.name]}
+              onChange={handleChange}
+            />
+          ))}
+          <Button type="submit" variant="contained">
+            Submit
+          </Button>
+        </form>
+      </Box>
+    </Modal>
   );
 }
