@@ -37,6 +37,7 @@ const useAuthCall = () => {
   };
 
   const login = async (userCredentials) => {
+    console.log('clicked')
     dispatch(fetchStart());
     try {
       const { data } = await axios.post(
