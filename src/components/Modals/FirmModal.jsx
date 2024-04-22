@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { Box, Button, Modal, TextField, Typography } from '@mui/material';
+import useStockCall from '../../hooks/useStockCall';
 
 const style = {
   position: 'absolute',
@@ -23,24 +24,17 @@ const modalFormFields = [
     required: true,
   },
   {
-    label: 'Password',
-    name: 'password',
-    type: 'password',
-    id: 'password',
+    label: 'Firm Phone',
+    name: 'phone',
+    type: 'text',
+    id: 'phone',
     required: true,
   },
   {
     label: 'Firm Address',
     name: 'address',
-    type: 'address',
+    type: 'text',
     id: 'address',
-    required: true,
-  },
-  {
-    label: 'Firm Phone',
-    name: 'phone',
-    type: 'phone',
-    id: 'phone',
     required: true,
   },
   {
@@ -53,9 +47,10 @@ const modalFormFields = [
 ];
 
 export default function FirmModal({ open, handleClose }) {
+  const { postStockData } = useStockCall();
+
   const [info, setInfo] = useState({
     name: '',
-    password: '',
     address: '',
     phone: '',
     image: '',
@@ -64,10 +59,10 @@ export default function FirmModal({ open, handleClose }) {
   function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(Object.fromEntries(data.entries()));
+    setInfo(Object.fromEntries(data.entries()));
+    postStockData('firms', info);
     setInfo({
       name: '',
-      password: '',
       address: '',
       phone: '',
       image: '',
