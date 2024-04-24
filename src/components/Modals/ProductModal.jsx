@@ -5,6 +5,7 @@ import Modal from "@mui/material/Modal";
 import * as React from "react";
 import useStockCall from "../../hooks/useStockCall";
 import { flexColumn, modalStyle } from "../../styles/globalStyle";
+import { useState } from 'react';
 
 export default function ProductModal({ open, handleClose }) {
   const [info, setInfo] = useState();

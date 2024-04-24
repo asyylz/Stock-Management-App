@@ -8,7 +8,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 const useStockCall = () => {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
-  const axiosWithToken = useAxios()
+  const axiosWithToken = useAxios();
 
   const getStockData = async (url) => {
     dispatch(fetchStart());
@@ -44,10 +44,10 @@ const useStockCall = () => {
       getStockData(url);
     }
   };
-  const postStockData = async (url,info) => {
+  const postStockData = async (url, info) => {
     dispatch(fetchStart());
     try {
-      await axiosWithToken.post(`${url}`,info);
+      await axiosWithToken.post(`${url}`, info);
       // getStockData(url)
     } catch (error) {
       console.log(error);
@@ -57,8 +57,7 @@ const useStockCall = () => {
     }
   };
 
-  return { getStockData, deleteStockData,    postStockData,deleteStockData
-  };
+  return { getStockData, deleteStockData, postStockData, deleteStockData };
 };
 
 export default useStockCall;
