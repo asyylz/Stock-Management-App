@@ -57,7 +57,7 @@ const useStockCall = () => {
     }
   };
 
-  return { getStockData, deleteStockData,    postStockData,
+  return { getStockData, deleteStockData,    postStockData,deleteStockData
   };
 };
 
