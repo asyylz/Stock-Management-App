@@ -51,7 +51,7 @@ export default function ProductModal({ open, handleClose }) {
                 onChange={handleChange}
               >
                 {
-                  categories.map(category=> <MenuItem value={category._id}>{category.name}</MenuItem>)
+                  categories.map(category=> <MenuItem key={category._id} value={category._id}>{category.name}</MenuItem>)
                 }
               </Select>
             </FormControl>
@@ -66,7 +66,7 @@ export default function ProductModal({ open, handleClose }) {
                 onChange={handleChange}
               >
                 {
-                  brands.map(brand=> <MenuItem value={brand._id}>{brand.name}</MenuItem>)
+                  brands.map(brand=> <MenuItem key={brand._id} value={brand._id}>{brand.name}</MenuItem>)
                 }
               </Select>
             </FormControl>
