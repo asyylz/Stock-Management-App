@@ -57,7 +57,35 @@ const useStockCall = () => {
     }
   };
 
-  return { getStockData, deleteStockData, postStockData, deleteStockData };
+  //!Promise.all()
+  const getProCatBrand = async () => {
+    dispatch(fetchStart());
+    try {
+      // const [a,b] = [1,2] // array destructuring
+      const [products, categories, brands] = await Promise.all([
+        axiosWithToken('products'),
+        axiosWithToken('categories'),
+        axiosWithToken('brands'),
+      ]);
+      dispatch(
+        getProCatBrandSuccess([
+          products?.data?.data,
+          categories?.data?.data,
+          brands?.data?.data,
+        ])
+      );
+    } catch (error) {
+      dispatch(fetchFail());
+    }
+  };
+
+  return {
+    getStockData,
+    deleteStockData,
+    postStockData,
+    deleteStockData,
+    getProCatBrand,
+  };
 };
 
 export default useStockCall;
